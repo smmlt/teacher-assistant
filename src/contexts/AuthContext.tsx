@@ -1,6 +1,6 @@
 // src/contexts/AuthContext.tsx
 
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, use, useContext, useEffect, useState } from 'react';
 import { 
     User, onAuthStateChanged, 
     signInWithEmailAndPassword, 
@@ -48,4 +48,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             {children}
         </AuthContext.Provider>
     );
-}
+};
+
+export const useAuth = () => useContext(AuthContext);
+
