@@ -1,8 +1,8 @@
 import { Text, View } from "react-native";
 
 export default function Index() {
-  return (
-    <View
+  return (null);
+    /*<View
       style={{
         flex: 1,
         justifyContent: "center",
@@ -10,6 +10,5 @@ export default function Index() {
       }}
     >
       <Text>Teacher Assistant App.</Text>
-    </View>
-  );
+    </View>*/
 }
