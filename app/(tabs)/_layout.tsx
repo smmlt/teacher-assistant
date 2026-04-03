@@ -1,26 +1,28 @@
-// app/(tabs)/_layout.tsx
-
-import React from 'react';
-import { Tabs } from 'expo-router';
-import { BookOpen, Users, User} from 'lucide-react-native';
+import React from "react";
+import { Tabs } from "expo-router";
+import { BookOpen, Users, User } from "lucide-react-native";
 
 export default function TabsLayout() {
-  return (
-    <Tabs screenOptions={{ headerShown: true }}>
-      <Tabs.Screen
-        name='index'
-        options={{
-          title: 'Classes',
-          tabBarIcon: ({ color }) => <BookOpen color={color} size={24} />
-        }}
-      />
-      <Tabs.Screen
-        name='profile'
-        options={{
-          title: 'Profile',
-          tabBarIcon: ({ color }) => <User color={color} size={24} />
-        }}
-      />      
-    </Tabs>
-  );
+    return (
+        <Tabs screenOptions={{ headerShown: true }}>
+            <Tabs.Screen
+                name="index"
+                options={{
+                    title: "Класи",
+                    tabBarIcon: ({ color }: { color: string }) => (
+                        <BookOpen size={24} color={color} />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="profile"
+                options={{
+                    title: "Профіль",
+                    tabBarIcon: ({ color }: { color: string }) => (
+                        <User size={24} color={color} />
+                    ),
+                }}
+            />
+        </Tabs>
+    );
 }
