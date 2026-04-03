@@ -1,4 +1,5 @@
 // app/_layout.tsx
+
 import "../global.css"
 import { Slot, useRouter, useSegments } from 'expo-router';
 import { useAuth } from '@/src/contexts/AuthContext';
