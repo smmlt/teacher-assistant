@@ -13,7 +13,7 @@ export default function TabsLayout() {
           tabBarIcon: ({ color }) => <BookOpen color={color} size={24} />
         }}
       />      
-    </Tabs>>
+    </Tabs>
   );
 }
 
