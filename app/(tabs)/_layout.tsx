@@ -1,4 +1,3 @@
-import { View, Text, TextInput, StyleSheet } from 'react-native';
 import React from 'react';
 import { Tabs } from 'expo-router';
 import { BookOpen, Users, User} from 'lucide-react-native';
@@ -12,9 +11,14 @@ export default function TabsLayout() {
           title: 'Classes',
           tabBarIcon: ({ color }) => <BookOpen color={color} size={24} />
         }}
+      />
+      <Tabs.Screen
+        name='profile'
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ color }) => <User color={color} size={24} />
+        }}
       />      
     </Tabs>
   );
 }
-
-const styles = StyleSheet.create({});
