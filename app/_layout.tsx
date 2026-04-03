@@ -1,52 +1,36 @@
 // app/_layout.tsx
+import "../global.css"
+import { Slot, useRouter, useSegments } from 'expo-router';
+import { useAuth } from '@/src/contexts/AuthContext';
+import { useEffect } from 'react';
+import { AuthProvider } from '@/src/contexts/AuthContext';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { Slot, Redirect } from "expo-router";
-import { useAuth } from "@/src/contexts/AuthContext";
-import { View, ActivityIndicator } from "react-native";
-
-export default function RootLayout() {
+function RootLayoutNav() {
   const { user, loading } = useAuth();
+  const segments = useSegments();
+  const router = useRouter();
 
-  if (loading) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator />
-      </View>
-    );
-  }
+  useEffect(() => {
+    if (loading) return;
+    const inAuthGroup = segments[0] === '(auth)';
 
-  if (user) {
-    return <Redirect href="/(tabs)" />;
-  }
+    if (!user && !inAuthGroup) {
+      router.replace('/(auth)/login');
+    } else if (user && inAuthGroup) {
+      router.replace('/(tabs)');
+    }
+  }, [user, loading, segments]);
 
-  return <Redirect href="/(auth)/login" />;
+  return <Slot />;
 }
 
-
-// import { Slot, useRouter } from "expo-router";
-// import { useAuth } from "@/src/contexts/AuthContext";
-// import { useEffect } from "react";
-// import { View, ActivityIndicator } from "react-native";
-
-// export default function RootLayout() {
-//   const { user, loading } = useAuth();
-//   const router = useRouter();
-  
-//   useEffect(() => {
-//     if (!loading) {
-//       if (user) router.replace("/(auth)/login");
-//       else router.replace("/(tabs)");
-//     }
-//   }, [user, loading]);
-
-//   if (loading) {
-//     return (
-//       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-//         <ActivityIndicator />
-//       </View>
-//     );
-//   }
-
-//   return <Slot />;
-// }
-
+export default function RootLayout() {
+  return (
+    <SafeAreaProvider>
+      <AuthProvider>
+        <RootLayoutNav />
+      </AuthProvider>
+    </SafeAreaProvider>
+  );
+}
